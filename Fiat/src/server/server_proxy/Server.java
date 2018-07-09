@@ -40,7 +40,7 @@ public class Server {
 		
 		Utente u=gu.registraUtente("dario", 1234);
 		
-		System.out.println(u.getId());
+		//System.out.println(u.getId());
 		u.aggiungi_Conf(conf);
 		u.aggiungi_Proprieta(a1);
 		u.aggiungi_Proprieta(a2);

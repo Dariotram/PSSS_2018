@@ -8,8 +8,5 @@ import server.entity.Utente;
 
 public interface IGestoreCPS_Server extends IGestoreCPS{
 
-	public ArrayList<Auto> SelezionaAuto(Utente u);
-	public ArrayList<Configurazione> SelezionaConfigurazione(Utente u);
-	public void associaConfigurazione(Auto a,Configurazione c);
-	public Utente checkUtente(Utente u);
+	public void associaConfigurazione(Utente u);
 }

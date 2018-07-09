@@ -33,12 +33,12 @@ public class Gestore_CPS extends Gestore_CPS_Skeleton{
 	}
 
 	@Override
-	public ArrayList<Auto> SelezionaAuto(Utente u){
+	public ArrayList<Auto> getAllAuto(Utente u){
 		return g_utente.getAllAuto(u);
 	}
 
 	@Override
-	public ArrayList<Configurazione> SelezionaConfigurazione(Utente u){
+	public ArrayList<Configurazione> getAllConf(Utente u){
 		return g_utente.getListaConf(u);
 	}
 	
@@ -47,11 +47,11 @@ public class Gestore_CPS extends Gestore_CPS_Skeleton{
 	}
 
 	@Override
-	public void associaConfigurazione(Auto a, Configurazione c) {
+	public void adattaConfigurazione(Auto a, Configurazione c) {
 		ArrayList<Componente> allComp_auto=g_auto.getAllComp(a);
 		ArrayList<Componente> allComp_conf=g_conf.getListaComp(c);
-		System.out.println("Compoenti auto sono in numero:"+allComp_auto.size());
-		System.out.println("Compoenti configurazione sono in numero:"+allComp_conf.size());
+		System.out.println("Componenti auto sono in numero:"+allComp_auto.size());
+		System.out.println("Componenti configurazione sono in numero:"+allComp_conf.size());
 		
 		//sto ciclo si può ottimizzare con while o uso di altre funzioni
 		for(int i=0;i<allComp_auto.size();i++) {

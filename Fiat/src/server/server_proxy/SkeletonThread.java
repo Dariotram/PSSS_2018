@@ -27,42 +27,42 @@ public class SkeletonThread implements Runnable{
 	@Override
 	public void run() {
 		try {
-			DataInputStream din= new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-			
-			ObjectInputStream ois= new ObjectInputStream(din);
-			
-			System.out.println("OK");
-			Utente utente=(Utente)ois.readObject();
-			Utente u=this.ges_cps.checkUtente(utente);
-			System.out.println("Id_utente: "+u.getId());
-			System.out.println("Questo utente ha macchine pari a:"+u.getListaProprieta().size() );
+			DataInputStream din= new DataInputStream(new BufferedInputStream(socket.getInputStream()));			
 			String comando= din.readUTF();
-			if(comando.equalsIgnoreCase("associaConfigurazione")){
-				
-				/*Comunicazione con il client*/
-				System.out.println("Associa conf");
-				ArrayList<Auto> listaAuto= new ArrayList<Auto>(ges_cps.SelezionaAuto(u) );
-				DataOutputStream dos= new DataOutputStream(new BufferedOutputStream(socket.getOutputStream() ));
-				ObjectOutputStream oos= new ObjectOutputStream(dos);
-				
-				oos.writeObject(listaAuto);
-				oos.flush();
-				System.out.println("Aspetto scelta Auto");
-				Auto autoScelta=(Auto)ois.readObject();
-				System.out.println("Scelto Auto");
-				
-				ArrayList<Configurazione> listaConfigurazione= new ArrayList<Configurazione>(ges_cps.SelezionaConfigurazione(u));
-				oos.writeObject(listaConfigurazione);
-				oos.flush();
-				System.out.println("Aspetto scelta Conf");
-				Configurazione confScelta=(Configurazione)ois.readObject();
-				System.out.println("Scelto Conf");
-				
-				//ges_cps.SelezionaConfigurazione(u);
-				//ges_cps.associaConfigurazione(u);
-				this.ges_cps.associaConfigurazione(autoScelta,confScelta);
+			DataOutputStream dos= new DataOutputStream(new BufferedOutputStream(socket.getOutputStream() ));
+			if(comando.equalsIgnoreCase("adattaConfigurazione")){
+				System.out.println("Adatta conf");
+				ObjectInputStream ois= new ObjectInputStream(din);
+				Auto autoScelta= (Auto) ois.readObject();
+				Configurazione confScelta= (Configurazione) ois.readObject();
+			
+				this.ges_cps.adattaConfigurazione(autoScelta,confScelta);
+				dos.writeBoolean(true);
+				dos.flush();
 				System.out.println("Configurata");
-			}else{
+				
+			}else if(comando.equalsIgnoreCase("getAllConf")){
+				System.out.println("getAllConf");
+				ObjectInputStream ois= new ObjectInputStream(din);
+				Utente utente=(Utente)ois.readObject();
+				Utente u=this.ges_cps.checkUtente(utente);
+				ArrayList<Configurazione> lista_conf=new ArrayList<Configurazione>(this.ges_cps.getAllConf(u) );
+				
+				ObjectOutputStream oos= new ObjectOutputStream(dos);
+				oos.writeObject(lista_conf);
+				oos.flush();
+			}else if(comando.equalsIgnoreCase("getAllAuto") ) {
+				System.out.println("getAllAuto");
+				
+				ObjectInputStream ois= new ObjectInputStream(din);
+				Utente utente=(Utente)ois.readObject();
+				Utente u=this.ges_cps.checkUtente(utente);
+				ArrayList<Auto> lista_auto=new ArrayList<Auto>(this.ges_cps.getAllAuto(u) );
+				
+				ObjectOutputStream oos= new ObjectOutputStream(dos);
+				oos.writeObject(lista_auto);
+				oos.flush();
+			}else {
 				System.out.println("Comando non riconosciuto");
 			}
 		}catch(IOException e ){

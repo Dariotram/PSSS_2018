@@ -21,6 +21,7 @@ public class Utente implements Serializable{
 		id=id++;
 		lista_conf=new ArrayList<Configurazione>();
 		lista_proprieta= new ArrayList<Proprieta>();
+		
 	}
 
 	public int getPassword() {
