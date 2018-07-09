@@ -1,15 +1,15 @@
 package client.client_core;
 
-import client.client_proxy.GestoreCPS_Proxy;
+import java.io.IOException;
 import server.entity.Utente;
 
 public class UtenteConsole {
 
-	public static void main(String[] args) {
-		GestoreCPS_Proxy ges_cps=new GestoreCPS_Proxy();
+	public static void main(String[] args) throws IOException {
+		UtenteBusiness ub=new UtenteBusiness();
 		Utente u= new Utente("dario",1234);
-		System.out.println(u.getId());
-		ges_cps.associaConfigurazione(u);
+		System.out.println("Avvio associaConfigurazione");
+		ub.associaConfigurazione(u);
 	}
 
 }

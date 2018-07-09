@@ -38,7 +38,7 @@ public class InfoUtente {
 	
 	public Utente checkUtente(Utente u) {
 		for(int i=0;i<lista_utente.size();i++) {
-			if(lista_utente.get(i).getName().equals(u.getName()) ) {
+			if(lista_utente.get(i).getName().equals(u.getName()) ) {//DA MODIFICARE
 				System.out.println("Trovato l'utente");
 				return lista_utente.get(i);
 			}
