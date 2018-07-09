@@ -3,6 +3,7 @@ package server.server_proxy;
 import java.util.ArrayList;
 
 import server.core_business.Gestore_Auto;
+import server.core_business.Gestore_CPS;
 import server.core_business.Gestore_Conf;
 import server.core_business.Gestore_Utente;
 import server.entity.Auto;

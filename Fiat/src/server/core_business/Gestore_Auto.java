@@ -34,5 +34,9 @@ public class Gestore_Auto {
 	public void configura_Auto(Auto a,Configurazione c) {
 		a.configura_Auto(c);
 	}
+	
+	public void configuraComp(Componente Comp_Auto,Componente c) {
+		Comp_Auto.configuraComp(c);
+	}
 
 }

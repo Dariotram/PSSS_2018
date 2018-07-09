@@ -10,16 +10,16 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import interfaccia.IGestoreCPS_Server;
+import interfaccia.IGestoreCPS;
 import server.entity.Utente;
 import server.entity.Auto;
 import server.entity.Configurazione;
 public class SkeletonThread implements Runnable{
 
 	private Socket socket;
-	private IGestoreCPS_Server ges_cps;
+	private IGestoreCPS ges_cps;
 	
-	public SkeletonThread(Socket s, IGestoreCPS_Server iges) {
+	public SkeletonThread(Socket s, IGestoreCPS iges) {
 		socket=s;
 		ges_cps=iges;
 	}

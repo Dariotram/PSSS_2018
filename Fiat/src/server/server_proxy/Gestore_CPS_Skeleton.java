@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import interfaccia.IGestoreCPS_Server;
+import interfaccia.IGestoreCPS;
 
 
-public abstract class Gestore_CPS_Skeleton implements IGestoreCPS_Server{
+public abstract class Gestore_CPS_Skeleton implements IGestoreCPS{
 
 	public void runSkeleton(){
 		try{

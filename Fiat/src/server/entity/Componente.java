@@ -9,18 +9,22 @@ public class Componente implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String nome;
-	private int altezza;
+	private int valore;
 	public Componente(String n,int a) {
 		nome=n;
-		altezza=a;
+		valore=a;
 	}
 	
 	public void configuraComp(Componente c) {
-		altezza=c.altezza;
+		valore=c.valore;
 	}
 	
 	public String getNome() {
 		return this.nome;
+	}
+	
+	public int getValore() {
+		return this.valore;
 	}
 	
 	
