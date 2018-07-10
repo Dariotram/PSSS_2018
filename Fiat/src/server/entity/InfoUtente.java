@@ -46,5 +46,31 @@ public class InfoUtente {
 		return null;
 	}
 	
+	public int getPassword(Utente u) {
+		return u.getPassword();
+	}
+
+	public String getName(Utente u) {
+		return u.getName();
+	}
+	
+	public int getId(Utente u) {
+		return u.getId();
+	}
+	public void aggiungi_Conf(Utente u,Configurazione c) {
+		u.aggiungi_Conf(c);
+	}
+	
+	public void aggiungi_Proprieta(Utente u,Auto a) {
+		u.aggiungi_Proprieta(a);
+	}
+	
+	public ArrayList<Configurazione> getListaConf(Utente u) {
+		return u.getListaConf();
+	}
+	
+	public ArrayList<Proprieta> getListaProprieta(Utente u){
+		return u.getListaProprieta();
+	}
 	
 }
