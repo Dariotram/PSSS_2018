@@ -33,8 +33,8 @@ public class Gestore_Utente {
 		return lista_auto;
 	}
 	
-	public Utente registraUtente(String s,int p) {
-		return info_utente.registraUtente(s, p);
+	public Utente registraUtente(int id,String s,String p,String email) {
+		return info_utente.registraUtente(id,s,p,email);
 	}
 	
 	public Utente getUtente(int id) {
