@@ -12,10 +12,10 @@ public class Configurazione implements Serializable {
 	private static int id=0;
 	private String name;
 	
-	public Configurazione(String n) {
+	public Configurazione(int id, String n) {
 		lista_sett=new ArrayList<Settaggio>();
 		this.name=n;
-		id=id++;
+		this.id=id;
 	}
 	
 	public int getId() {

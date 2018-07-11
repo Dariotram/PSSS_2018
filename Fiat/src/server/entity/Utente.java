@@ -10,21 +10,23 @@ public class Utente implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int password;
+	private String password;
 	private String name;
+	private String email;
 	private static int id=0;
 	private ArrayList<Configurazione> lista_conf= null;
 	private ArrayList<Proprieta> lista_proprieta= null;
-	public Utente(String n,int p) {
+	public Utente(int id,String n, String p, String email) {
+		this.id=id;
 		this.password=p;
 		this.name=n;
-		id=id++;
+		this.email=email;
 		lista_conf=new ArrayList<Configurazione>();
 		lista_proprieta= new ArrayList<Proprieta>();
 		
 	}
 
-	public int getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
