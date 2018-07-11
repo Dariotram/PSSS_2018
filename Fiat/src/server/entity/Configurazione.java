@@ -9,13 +9,12 @@ public class Configurazione implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Settaggio> lista_sett=null;
-	//private ArrayList<Auto> lista_auto_conf=null;
 	private static int id=0;
 	private String name;
 	
-	public Configurazione(ArrayList<Settaggio> l_sett) {
-		lista_sett=new ArrayList<Settaggio>(l_sett);
-		//lista_auto_conf= new ArrayList<Auto>();
+	public Configurazione(String n) {
+		lista_sett=new ArrayList<Settaggio>();
+		this.name=n;
 		id=id++;
 	}
 	
@@ -39,7 +38,7 @@ public class Configurazione implements Serializable {
 		return lista_comp;
 	}
 	
-	public void aggiungiSett(Componente c, int val) {
+	public void setSettaggio(Componente c, int val) {
 		Settaggio s= new Settaggio(c,val);
 		lista_sett.add(s);
 	}

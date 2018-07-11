@@ -26,14 +26,14 @@ public class Server {
 		Componente c= new Componente("Sediolini");
 		Componente c2= new Componente("Specchietti");
 		
-		Auto a1= new Auto("1234",1);
-		Auto a2= new Auto("4321",2);
+		Auto a1= new Auto("1234");
+		Auto a2= new Auto("4321");
 		a1.aggiungiConfigurabilita(c);
 		a1.aggiungiConfigurabilita(c2);
 		a2.aggiungiConfigurabilita(c);
 		a2.aggiungiConfigurabilita(c2);
 		
-		ArrayList<Settaggio> listaSett=new ArrayList<Settaggio>();		
+	/*	ArrayList<Settaggio> listaSett=new ArrayList<Settaggio>();		
 		ArrayList<Settaggio> listaSett2=new ArrayList<Settaggio>();
 		Settaggio set1= new Settaggio(c,2);
 		Settaggio set2= new Settaggio(c2,3);
@@ -43,11 +43,15 @@ public class Server {
 		listaSett.add(set1);
 		listaSett.add(set2);
 		listaSett2.add(set12);
-		listaSett2.add(set22);
+		listaSett2.add(set22);*/
 		
-		Configurazione conf= new Configurazione(listaSett);
-		Configurazione conf2= new Configurazione(listaSett2);
+		Configurazione conf= new Configurazione("conf1");
+		Configurazione conf2= new Configurazione("conf2");
+		conf.setSettaggio(c2, 99);
+		conf.setSettaggio(c, 99);
 		
+		conf2.setSettaggio(c2, 1);
+		conf2.setSettaggio(c, 1);
 		if(conf2.getListaComp().get(0).equals(a1.getListaConfigurabilita().get(0).getComponente()) ) {
 			System.out.println("OOOOK");
 		}

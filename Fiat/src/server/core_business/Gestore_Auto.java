@@ -43,5 +43,12 @@ public class Gestore_Auto {
 		a.configura_Auto(c);
 	}
 	
+	public void aggiungiAuto(String targa, ArrayList<Componente> l_comp) {
+		Auto a= new Auto(targa) ;
+		for(int i=0;i<l_comp.size();i++) {
+			a.aggiungiConfigurabilita(l_comp.get(i));
+		}
+	}
+	
 
 }

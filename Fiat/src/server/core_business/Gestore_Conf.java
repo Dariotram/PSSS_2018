@@ -30,10 +30,21 @@ public class Gestore_Conf {
 		return c.getListaComp();
 	}
 	
-	public void aggiungiSettaggio(Configurazione conf,Componente c, int val) {
-		conf.aggiungiSett(c, val);
+	public void setSettaggio(Configurazione conf,Componente c, int val) {
+		conf.setSettaggio(c, val);
 	}
 	
+	public Settaggio getSettaggio(Configurazione conf,Componente c) {
+		return conf.getSettaggio(c);
+	}
+	
+	public void aggiungiConfigurazione(String n, ArrayList<Componente> l_comp, ArrayList<Integer> l_val ) {
+		Configurazione c= new Configurazione(n);
+		for(int i=0;i<l_comp.size();i++) {
+			c.setSettaggio(l_comp.get(i), l_val.get(i));
+		}
+		
+	}
 	/*
 	public void aggiungiAutoConfig(Auto a,Settaggio s) {
 		s.aggiungiAutoSett(a);

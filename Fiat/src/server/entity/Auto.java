@@ -10,14 +10,14 @@ public class Auto implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String targa;
-	private int id;
+	private static int id=0;
 	private ArrayList<Configurabilita> lista_configurabilita=null;
 	private Configurazione configurazione;
 	
-	public Auto(String t,int id) {
+	public Auto(String t) {
 		lista_configurabilita= new ArrayList<Configurabilita>();
 		this.targa=t;
-		this.id=id;
+		id=id++;
 	}
 	public String getTarga() {
 		return  this.targa;
