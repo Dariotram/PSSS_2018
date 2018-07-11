@@ -13,9 +13,10 @@ public class Utente implements Serializable{
 	private String password;
 	private String name;
 	private String email;
-	private static int id=0;
+	private int id;
 	private ArrayList<Configurazione> lista_conf= null;
 	private ArrayList<Proprieta> lista_proprieta= null;
+	
 	public Utente(int id,String n, String p, String email) {
 		this.id=id;
 		this.password=p;
@@ -33,7 +34,9 @@ public class Utente implements Serializable{
 	public String getName() {
 		return name;
 	}
-	
+	public String getEmail() {
+		return email;
+	}
 	public int getId() {
 		return id;
 	}

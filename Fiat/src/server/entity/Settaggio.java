@@ -20,6 +20,10 @@ public class Settaggio implements Serializable {
 		return this.valore;
 	}
 	
+	public void setValore(int v){
+		valore=v;
+	}
+	
 	public Componente getComponente() {
 		return this.comp;
 	}

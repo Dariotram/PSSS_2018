@@ -21,8 +21,8 @@ public class InfoUtente {
 		return InfoUtente_instance;
 	}
 	
-	public Utente registraUtente(String s,int p) {
-		Utente u= new Utente(s,p);
+	public Utente registraUtente(int id, String s, String p, String email) {
+		Utente u= new Utente(id,s,p,email);
 		lista_utente.add(u);
 		return u;
 	}
@@ -46,12 +46,15 @@ public class InfoUtente {
 		return null;
 	}
 	
-	public int getPassword(Utente u) {
+	public String getPassword(Utente u) {
 		return u.getPassword();
 	}
 
 	public String getName(Utente u) {
 		return u.getName();
+	}
+	public String getEmail(Utente u) {
+		return u.getEmail();
 	}
 	
 	public int getId(Utente u) {
