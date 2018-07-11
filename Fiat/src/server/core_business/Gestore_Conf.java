@@ -2,9 +2,9 @@ package server.core_business;
 
 import java.util.ArrayList;
 
-import server.entity.Auto;
 import server.entity.Componente;
 import server.entity.Configurazione;
+import server.entity.Settaggio;
 
 public class Gestore_Conf {
 
@@ -22,11 +22,20 @@ public class Gestore_Conf {
 		return gestoreConf_instance;
 	}
 	
+	public ArrayList<Settaggio> getListaSett(Configurazione c) {
+		return c.getListaSett();
+	}
+	
 	public ArrayList<Componente> getListaComp(Configurazione c) {
 		return c.getListaComp();
 	}
 	
-	public void aggiungiAutoConfig(Auto a,Configurazione c) {
-		c.aggiungiAutoConfig(a);
+	public void aggiungiSettaggio(Configurazione conf,Componente c, int val) {
+		conf.aggiungiSett(c, val);
 	}
+	
+	/*
+	public void aggiungiAutoConfig(Auto a,Settaggio s) {
+		s.aggiungiAutoSett(a);
+	}*/
 }

@@ -8,14 +8,14 @@ public class Configurazione implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Componente> lista_comp=null;
-	private ArrayList<Auto> lista_auto_config=null;
+	private ArrayList<Settaggio> lista_sett=null;
+	//private ArrayList<Auto> lista_auto_conf=null;
 	private static int id=0;
 	private String name;
 	
-	public Configurazione(ArrayList<Componente> l_comp) {
-		lista_comp=new ArrayList<Componente>(l_comp);
-		lista_auto_config= new ArrayList<Auto>();
+	public Configurazione(ArrayList<Settaggio> l_sett) {
+		lista_sett=new ArrayList<Settaggio>(l_sett);
+		//lista_auto_conf= new ArrayList<Auto>();
 		id=id++;
 	}
 	
@@ -27,15 +27,37 @@ public class Configurazione implements Serializable {
 		return name;
 	}
 	
-	public ArrayList<Componente> getListaComp() {
+	public ArrayList<Settaggio> getListaSett() {
+		return lista_sett;
+	}
+	
+	public ArrayList<Componente> getListaComp(){
+		ArrayList<Componente> lista_comp= new ArrayList<Componente>();
+		for(int i=0;i<lista_sett.size();i++) {
+			lista_comp.add(lista_sett.get(i).getComponente());
+		}
 		return lista_comp;
 	}
 	
-	public void aggiungiAutoConfig(Auto a) {
-		lista_auto_config.add(a);
+	public void aggiungiSett(Componente c, int val) {
+		Settaggio s= new Settaggio(c,val);
+		lista_sett.add(s);
 	}
 	
-	public ArrayList<Auto> getAutoConfig() {
-		return lista_auto_config;
+	public Settaggio getSettaggio(Componente c) {
+		for(int i=0;i<lista_sett.size();i++) {
+			if(lista_sett.get(i).getComponente().equals(c))
+				return lista_sett.get(i);
+		}
+		return null;
 	}
+	
+	/*
+	public void aggiungiAutoConf(Auto a) {
+		lista_auto_conf.add(a);
+	}
+	
+	public ArrayList<Auto> getAutoConf() {
+		return lista_auto_conf;
+	}*/
 }

@@ -9,17 +9,17 @@ public class Auto implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int targa;
+	private String targa;
 	private int id;
 	private ArrayList<Configurabilita> lista_configurabilita=null;
 	private Configurazione configurazione;
 	
-	public Auto(int t,int id) {
+	public Auto(String t,int id) {
 		lista_configurabilita= new ArrayList<Configurabilita>();
 		this.targa=t;
 		this.id=id;
 	}
-	public int getTarga() {
+	public String getTarga() {
 		return  this.targa;
 	}
 	
@@ -31,7 +31,7 @@ public class Auto implements Serializable{
 		Configurabilita configurab= new Configurabilita(this,comp);
 		lista_configurabilita.add(configurab);
 	}
-	
+
 	public ArrayList<Configurabilita> getListaConfigurabilita() {
 		return lista_configurabilita;
 	}

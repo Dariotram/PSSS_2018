@@ -31,12 +31,17 @@ public class Gestore_Auto {
 		return lista_comp;
 	}
 	
+	public void setComp(Auto a,Componente c, int v) {
+		ArrayList<Configurabilita> lista_configurab=new ArrayList<Configurabilita>(a.getListaConfigurabilita() );
+		for(int i=0;i<lista_configurab.size();i++) {
+			if(lista_configurab.get(i).getComponente().equals(c))
+				lista_configurab.get(i).setValore(v);
+			}
+	}
+	
 	public void configura_Auto(Auto a,Configurazione c) {
 		a.configura_Auto(c);
 	}
 	
-	public void configuraComp(Componente Comp_Auto,Componente c) {
-		Comp_Auto.configuraComp(c);
-	}
 
 }

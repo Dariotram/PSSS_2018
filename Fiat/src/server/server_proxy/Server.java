@@ -10,6 +10,7 @@ import server.entity.Auto;
 import server.entity.Componente;
 import server.entity.Configurazione;
 import server.entity.Utente;
+import server.entity.Settaggio;
 
 public class Server {
 
@@ -22,23 +23,34 @@ public class Server {
 		Gestore_Auto ga=Gestore_Auto.getGestoreAuto();
 		Gestore_Conf gc=Gestore_Conf.getGestoreConf();
 		
-		Componente c= new Componente("Sediolini",1234);
-		Componente c2= new Componente("Sediolini",23);
-		ArrayList<Componente> listaComponenti=new ArrayList<Componente>();		
-		ArrayList<Componente> listaComponenti2=new ArrayList<Componente>();
-		listaComponenti.add(c);
-		listaComponenti2.add(c);
-		listaComponenti2.add(c2);
+		Componente c= new Componente("Sediolini");
+		Componente c2= new Componente("Specchietti");
 		
-		Auto a1= new Auto(1234,1);
-		Auto a2= new Auto(4321,2);
+		Auto a1= new Auto("1234",1);
+		Auto a2= new Auto("4321",2);
 		a1.aggiungiConfigurabilita(c);
+		a1.aggiungiConfigurabilita(c2);
 		a2.aggiungiConfigurabilita(c);
 		a2.aggiungiConfigurabilita(c2);
 		
-		Configurazione conf= new Configurazione(listaComponenti);
-		Configurazione conf2= new Configurazione(listaComponenti2);
+		ArrayList<Settaggio> listaSett=new ArrayList<Settaggio>();		
+		ArrayList<Settaggio> listaSett2=new ArrayList<Settaggio>();
+		Settaggio set1= new Settaggio(c,2);
+		Settaggio set2= new Settaggio(c2,3);
 		
+		Settaggio set12= new Settaggio(c,99);
+		Settaggio set22= new Settaggio(c2,88);
+		listaSett.add(set1);
+		listaSett.add(set2);
+		listaSett2.add(set12);
+		listaSett2.add(set22);
+		
+		Configurazione conf= new Configurazione(listaSett);
+		Configurazione conf2= new Configurazione(listaSett2);
+		
+		if(conf2.getListaComp().get(0).equals(a1.getListaConfigurabilita().get(0).getComponente()) ) {
+			System.out.println("OOOOK");
+		}
 		Utente u=gu.registraUtente("dario", 1234);
 		
 		//System.out.println(u.getId());

@@ -54,16 +54,18 @@ public class Gestore_CPS extends Gestore_CPS_Skeleton{
 		//sto ciclo si può ottimizzare con while o uso di altre funzioni
 		for(int i=0;i<allComp_auto.size();i++) {
 			for(int j=0;j<allComp_conf.size();j++) {
-				if( allComp_conf.get(j).equals(allComp_auto.get(i)) ) {//se sono lo stesso componente(stesso nome oppure boh)
-					System.out.println("Configuro il componente:"+allComp_conf.get(j).getNome());
-					g_auto.configuraComp(allComp_auto.get(i), allComp_conf.get(j));// un metodo che dato un componente ne assegna i valori ad un altro componente
+				System.out.println("Comparo il componente Conf:"+allComp_conf.get(j).getNome());
+				System.out.println("con il componente Auto:"+allComp_auto.get(i).getNome());
+				if( allComp_conf.get(j).getNome().equals( allComp_auto.get(i).getNome() ) ) {
+					System.out.println("\nConfiguro il componente:"+allComp_conf.get(j).getNome());
+					int val=c.getSettaggio(allComp_conf.get(j) ).getValore();
+					g_auto.setComp(a, allComp_conf.get(j),val);
 				}
 			}
-			//System.out.println("Comparo con prossimo componete auto");
+			System.out.println("Comparo con prossimo componete auto\n");
 		}
 		
 		g_auto.configura_Auto(a, c);
-		g_conf.aggiungiAutoConfig(a, c);
 		
 	}
 
