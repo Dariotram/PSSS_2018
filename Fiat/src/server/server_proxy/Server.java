@@ -23,17 +23,17 @@ public class Server {
 		Gestore_Auto ga=Gestore_Auto.getGestoreAuto();
 		Gestore_Conf gc=Gestore_Conf.getGestoreConf();
 		
-		Componente c= new Componente("Sediolini");
-		Componente c2= new Componente("Specchietti");
+		Componente c= new Componente(1,"Sediolini");
+		Componente c2= new Componente(2,"Specchietti");
 		
-		Auto a1= new Auto("1234");
-		Auto a2= new Auto("4321");
+		Auto a1= new Auto(1,"1234","a");
+		Auto a2= new Auto(2,"4321","b");
 		a1.aggiungiConfigurabilita(c);
 		a1.aggiungiConfigurabilita(c2);
 		a2.aggiungiConfigurabilita(c);
 		a2.aggiungiConfigurabilita(c2);
 		
-	/*	ArrayList<Settaggio> listaSett=new ArrayList<Settaggio>();		
+		ArrayList<Settaggio> listaSett=new ArrayList<Settaggio>();		
 		ArrayList<Settaggio> listaSett2=new ArrayList<Settaggio>();
 		Settaggio set1= new Settaggio(c,2);
 		Settaggio set2= new Settaggio(c2,3);
@@ -43,19 +43,22 @@ public class Server {
 		listaSett.add(set1);
 		listaSett.add(set2);
 		listaSett2.add(set12);
-		listaSett2.add(set22);*/
+		listaSett2.add(set22);
 		
-		Configurazione conf= new Configurazione("conf1");
-		Configurazione conf2= new Configurazione("conf2");
+		Configurazione conf= new Configurazione(1,"confA");
+		Configurazione conf2= new Configurazione(2,"confB");
+		
 		conf.setSettaggio(c2, 99);
 		conf.setSettaggio(c, 99);
 		
 		conf2.setSettaggio(c2, 1);
 		conf2.setSettaggio(c, 1);
+		
 		if(conf2.getListaComp().get(0).equals(a1.getListaConfigurabilita().get(0).getComponente()) ) {
 			System.out.println("OOOOK");
 		}
-		Utente u=gu.registraUtente("dario", 1234);
+		
+		Utente u=gu.registraUtente(1,"dario","1234","ancelotti@gmail.com");
 		
 		//System.out.println(u.getId());
 		u.aggiungi_Conf(conf);
