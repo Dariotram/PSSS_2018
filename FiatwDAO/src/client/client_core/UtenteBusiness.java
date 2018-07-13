@@ -72,7 +72,6 @@ public class UtenteBusiness {
 								
 				}
 			
-			
 			System.out.println("ottenuto lista Configurazione con dimensione: "+lista_conf.size());
 			System.out.println("Inserisci numero configurazione");
 			String indiceConf = stdin.readLine();
@@ -82,6 +81,14 @@ public class UtenteBusiness {
 			ges_cps.associaConfigurazione(a, c);
 		}catch(IOException e) {
 			e.printStackTrace();
+		}catch(Exception e){
+			handleException(e);
+			return;
 		}
 	}
+	
+	private static void handleException(Exception e) {
+    	System.out.format("Errore: %s\nImpossibile completare l'operazione, Riprova!\n", e.getLocalizedMessage());
+    	
+    }
 }

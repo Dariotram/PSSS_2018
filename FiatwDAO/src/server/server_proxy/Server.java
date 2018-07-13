@@ -16,12 +16,15 @@ public class Server {
 
 	public static void main(String[] args) {
 		Gestore_CPS ges_cps= Gestore_CPS.getGestoreCPS();
-		
-		 //Usato per provare il server senza il db
-		 
 		Gestore_Utente gu=Gestore_Utente.getGestoreUtente();
 		Gestore_Auto ga=Gestore_Auto.getGestoreAuto();
 		Gestore_Conf gc=Gestore_Conf.getGestoreConf();
+		ges_cps.runSkeleton();
+		
+		
+
+		 //Usato per provare il server senza il db
+		 
 	/*
 		Componente c= new Componente(1,"Sediolini");
 		Componente c2= new Componente(2,"Specchietti");
@@ -66,7 +69,7 @@ public class Server {
 		u.aggiungi_Proprieta(a2);
 		//fine settaggi
 		*/
-		ges_cps.runSkeleton();
+		
 			
 	}
 

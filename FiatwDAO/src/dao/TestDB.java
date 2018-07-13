@@ -115,14 +115,11 @@ public class TestDB {
 		Auto a=listaAuto.get(indiceSceltaAuto);
 		System.out.println("Scelgo Auto"+indiceSceltaAuto+"con targa:"+listaAuto.get(indiceSceltaAuto).getTarga());
 */
-	
-	
-	
+
 	
 	private static void handleException(Exception e) {
     	System.out.format("Errore: %s\nImpossibile completare l'operazione, Riprova!\n", e.getLocalizedMessage());
-    	//consoleWriter.format("Errore: %s\nImpossibile completare l'operazione, Riprova!\n", e.getLocalizedMessage());
-    	//consoleWriter.flush();
+    	
     }
 	
 	
