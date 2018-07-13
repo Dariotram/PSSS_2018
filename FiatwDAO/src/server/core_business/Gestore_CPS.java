@@ -94,6 +94,25 @@ public class Gestore_CPS extends Gestore_CPS_Skeleton{
 			e.printStackTrace();
 		}
 		
+		System.out.println("Configurazione "+c.getId());
+		for(int i=0;i<allComp_conf.size();i++)
+		{
+			System.out.println("**********************");
+			System.out.print("IdComponente  : ");
+			System.out.println(allComp_conf.get(i).getId());
+
+			System.out.print("NomeComponente  : ");
+			System.out.println(allComp_conf.get(i).getNome());
+			
+			System.out.print("ValoreComponente  : ");
+			System.out.println(allValues_conf.get(i));
+			
+			System.out.println("**********************");
+			System.out.println();
+						
+		}
+		
+		
 		
 		System.out.println("Componenti auto sono in numero:"+allComp_auto.size());
 		System.out.println("Componenti configurabili dell'AUTO scelta");
@@ -105,7 +124,7 @@ public class Gestore_CPS extends Gestore_CPS_Skeleton{
 
 			System.out.print("NomeComponente  : ");
 			System.out.println(allComp_auto.get(i).getNome());
-			
+	
 			System.out.println("**********************");
 			System.out.println();
 						
@@ -139,16 +158,11 @@ public class Gestore_CPS extends Gestore_CPS_Skeleton{
 					
 					try {
 						g_auto.setValoreComponenteAuto(a, allComp_auto.get(i), allValues_conf.get(j));
-						tm.commitTransaction();
 						g_auto.setConfigurazioneAuto(a, c);
-						tm.commitTransaction();
 					} catch (PersistenceException e) {
 						
 						e.printStackTrace();
 					} catch (TransactionStateException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (DAOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}

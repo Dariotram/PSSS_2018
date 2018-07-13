@@ -108,23 +108,22 @@ public class DAOAuto {
 	
 	
 	
-	public static Configurabilita setValoreConfigurabilita(TransactionManager tm,Auto a, Componente c, int val) throws DAOException{
+	public static void setValoreConfigurabilita(TransactionManager tm,Auto a, Componente c, int val) throws DAOException{
 		
 		tm.assertInTransaction();
 		int idAuto = a.getId();
 		int idComp = c.getId();
 		try(PreparedStatement stat = tm.getConnection().prepareStatement(
-                "UPDATE Configurabilita SET valoreComponente = ? WHERE id=? AND componente=?")){
+                "UPDATE Configurabilita SET valoreComponente = ? WHERE auto=? AND componente=?")){
    		 
    		 stat.setInt(1,val);
    		 stat.setInt(2,idAuto);
-   		 stat.setInt(1,idComp);
+   		 stat.setInt(3,idComp);
    		 stat.executeUpdate(); 
    	 	}catch(SQLException e){
    	 		throw new DAOException("Impossibile inserire valore  per auto"+a.getId()+" e componente"+c.getId(), e);
    	 	}
-		Configurabilita conf = new Configurabilita(a, c);
-		return conf;
+		
 	}
 	
 	public static void setConfigurazioneAuto(TransactionManager tm,Auto a, Configurazione c) throws DAOException{
@@ -143,10 +142,6 @@ public class DAOAuto {
    	 	}
 
 	}
-	
-	
-	
-	
 	
 	
 	//getsComponent renzi

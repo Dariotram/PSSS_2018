@@ -72,10 +72,9 @@ public class Gestore_Conf {
 			
 			tm.beginTransaction();
 			
-			if(!(c.equals(null))){
 				try {
 					listaValoriConf = DAOConfigurazione.readValoriConfigurazione(tm, c);
-					
+					tm.commitTransaction();
 				} catch (DAOException e) {
 					tm.rollbackTransaction();
 		            throw new PersistenceException("Impossibile trovare i valori dei componenti della configurazione"+c.getId(), e);
@@ -83,9 +82,6 @@ public class Gestore_Conf {
 				
 				return listaValoriConf;
 
-			}else{
-				throw new IllegalArgumentException("utente non valido");
-			}
 		}
 	
 }

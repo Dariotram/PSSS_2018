@@ -84,7 +84,7 @@ public class Gestore_Auto {
 				tm.commitTransaction();
 			} catch (DAOException e) {
 				tm.rollbackTransaction();
-	            throw new PersistenceException("Impossibile configurare i componenti dell'auto"+a.getId(), e);
+	            throw new PersistenceException("Impossibile configurare i componenti dell'auto "+a.getId(), e);
 			}
 			
 			//return configurabilita;

@@ -28,22 +28,19 @@ public class TestDB {
 		TransactionManager transactionManager = TransactionManagerFactory.createTransactionManager();
 		transactionManager.beginTransaction();
 		ArrayList<Configurazione> listaConf= new ArrayList<>();
+		ArrayList<Integer> listaValori= new ArrayList<>();
 		Utente u = new Utente(3, "andrea", "123", "andreap@gmail.com");
-		
-		
 		Componente c = null;
 		
 		
 		try {
-			c = DAOComponente.readComponenteById(transactionManager, 1);
-			
-			System.out.println(c.getNome());
-			
-			
-			
+		
 			
 			listaConf = DAOUtente.readConfigurazioniUtente(transactionManager,u);
 			transactionManager.commitTransaction();
+			
+			
+			
 		} catch (DAOException e) {
 			handleException(e);
 		    return;
@@ -70,6 +67,39 @@ public class TestDB {
 					System.out.println();
 							
 			}
+		
+	try {
+		
+			transactionManager.beginTransaction();
+			listaValori = DAOConfigurazione.readValoriConfigurazione(transactionManager, listaConf.get(0));
+			transactionManager.commitTransaction();
+			
+			
+			
+		} catch (DAOException e) {
+			handleException(e);
+		    return;
+		}
+		
+
+		
+	System.out.println("Configurazione "+listaConf.get(0).getId());
+	for(int i=0;i<listaValori.size();i++)
+	{
+		System.out.println("**********************");
+		
+		System.out.println(listaValori.get(i));
+
+	
+					
+	}
+					
+	}
+		
+		
+		
+		
+		
 		/*
 		System.out.println("ottenuto lista Configurazioni con dimensione: "+listaConf.size());
 		System.out.println("Inserisci pos conf");
@@ -85,7 +115,7 @@ public class TestDB {
 		Auto a=listaAuto.get(indiceSceltaAuto);
 		System.out.println("Scelgo Auto"+indiceSceltaAuto+"con targa:"+listaAuto.get(indiceSceltaAuto).getTarga());
 */
-	}
+	
 	
 	
 	
