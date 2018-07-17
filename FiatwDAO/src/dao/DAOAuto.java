@@ -27,8 +27,7 @@ public class DAOAuto {
 		a = readAuto(tm,targa);
 		return a;
 	}
-
-	
+ 
 	public static Auto readAuto(TransactionManager tm, String targa)throws DAOException {
     	tm.assertInTransaction();
     	Auto auto = null;
@@ -52,7 +51,28 @@ public class DAOAuto {
     	return auto;
     }
 	
-	
+	//invoca per la comunicazione con il client
+	public static Auto readAuto(TransactionManager tm, int id_auto)throws DAOException{
+		Auto a=null;
+		tm.assertInTransaction();
+		 try (PreparedStatement preparedStatement = tm.getConnection().prepareStatement("SELECT * FROM Auto WHERE id=?")) {
+			 preparedStatement.setInt(1, id_auto);
+	    		 try (ResultSet rs = preparedStatement.executeQuery()) {
+	    			 if (rs.next() == true){
+	    				 String targa = rs.getString("targa");
+		    			 String modello = rs.getString("modello");
+		    			 int idConfigurazione = rs.getInt("Configurazione");
+	    				 a = new Auto(id_auto,targa,modello);
+	    			 }
+	    		 }
+	    	 }catch(SQLException e){
+	    		 throw new DAOException("Impossibile trovare auto",e);
+	    	 }
+	    	if(a==null) {
+	    		throw new DAOException("auto inesistente");
+	    	}
+	    	return a;	
+	}
 	
 	public static ArrayList<Auto> readAll(TransactionManager tm)throws DAOException{
 		ArrayList<Auto> listaAuto= new ArrayList<Auto>();
@@ -152,7 +172,7 @@ public class DAOAuto {
 			stat = c.prepareStatement("SELECT * FROM Configurabilita WHERE auto="+a.getId());
 			ResultSet res=stat.executeQuery(); 
 			/*da configurabilita prendo gli id dei componenti
-			faccio questo perchè per creare un oggetto configurabilita
+			faccio questo perchï¿½ per creare un oggetto configurabilita
 			ho bisogno di un oggetto componente
 			while(res.next()){
 				idComp[i]=res.getInt("componente");

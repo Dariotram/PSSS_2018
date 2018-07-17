@@ -66,6 +66,26 @@ public class DAOConfigurazione {
 		return listaValori;
 		}
 	
+	
+	public static Configurazione readConf(TransactionManager tm, int id_conf) throws DAOException{
+		Configurazione c=null;
+		tm.assertInTransaction();
+		
+		try (PreparedStatement preparedStatement = tm.getConnection().prepareStatement("SELECT * FROM Configurazione WHERE idConfigurazione="+id_conf )) {
+			try (ResultSet rs = preparedStatement.executeQuery()) {
+				if (rs.next() == true){
+					String nome=rs.getString("nome");
+					c= new Configurazione(id_conf,nome);
+   				}
+			}
+   		 }catch(SQLException e){
+				 throw new DAOException("Impossibile trovare la configurazione con id: "+ e);
+		 }
+	    	if(c==null) {
+	    		throw new DAOException("configurazione inesistente");
+	    	}
+		return c;
+	}
 	/*
 	public static Configurazione create(TransactionManager tm, String nome, ArrayList<Settaggio> lista){
 		Configurazione conf= new Configurazione(nome,lista);

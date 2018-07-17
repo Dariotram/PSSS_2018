@@ -57,6 +57,27 @@ public class DAOUtente {
     	return utente;
     }
 	
+	public static Utente readUtente(TransactionManager tm, int id_utente)throws DAOException {
+    	tm.assertInTransaction();
+    	Utente utente = null;
+    	try (PreparedStatement ps = tm.getConnection().prepareStatement("SELECT * FROM Utente WHERE idUtente  =?")){
+    		ps.setInt(1, id_utente);
+    		try (ResultSet rs = ps.executeQuery()) {
+    			if (rs.next() == true) {
+    				String nome = rs.getString("nome");
+    				String password = rs.getString("password");
+    				String email = rs.getString("email");
+    				utente = new Utente(id_utente,nome,password,email);
+				}
+    		}
+    	} catch (SQLException e) {
+			throw new DAOException("Impossibile leggere utente",e);
+		}
+    	if(utente==null) {
+    		throw new DAOException("utente inesistente");
+    	}
+    	return utente;
+    }
 	public static ArrayList<Auto> readAutoUtente(TransactionManager tm, Utente u)throws DAOException{
 		ArrayList<Auto> listaAuto= new ArrayList<Auto>();
 		tm.assertInTransaction();
@@ -125,7 +146,7 @@ public static Proprieta createProprieta (TransactionManager tm,Utente u, Auto a)
 
 /*
 	public static ArrayList<Configurazione> getAllConf(Utente u){
-		//si può migliorare questo metodo
+		//si puï¿½ migliorare questo metodo
 		ArrayList<Configurazione> lista = new ArrayList<Configurazione>();
 		ArrayList<Componente> listaComp = new ArrayList<Componente>();
 		int[] listaIDConf = new int[100];

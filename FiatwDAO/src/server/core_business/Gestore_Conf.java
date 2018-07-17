@@ -1,14 +1,14 @@
 package server.core_business;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+
 
 import dao.DAOConfigurazione;
 import dao.DAOException;
-import dao.DAOUtente;
+
 import dao.TransactionManager;
 import dao.TransactionManagerFactory;
-import server.entity.Auto;
+
 import server.entity.Componente;
 import server.entity.Configurazione;
 import server.entity.Settaggio;
@@ -65,7 +65,8 @@ public class Gestore_Conf {
 		
 	}
 		
-		public ArrayList<Integer> getValoriConf(Configurazione c)throws PersistenceException{
+		public ArrayList<Integer> getValoriConf(int id_conf)throws PersistenceException{
+			Configurazione c= this.getConf(id_conf);
 			ArrayList<Integer> listaValoriConf = null;
 			
 			TransactionManager tm = TransactionManagerFactory.createTransactionManager();
@@ -82,6 +83,21 @@ public class Gestore_Conf {
 				
 				return listaValoriConf;
 
+		}
+		
+		public Configurazione getConf( int id_conf) throws PersistenceException {
+			TransactionManager tm = TransactionManagerFactory.createTransactionManager();
+			
+			tm.beginTransaction();
+			
+				try {
+					Configurazione c=DAOConfigurazione.readConf(tm, id_conf);
+					tm.commitTransaction();
+					return c;
+				} catch (DAOException e) {
+					tm.rollbackTransaction();
+		            throw new PersistenceException("Impossibile trovare la configurazione con questo id"+id_conf, e);
+				}
 		}
 	
 }

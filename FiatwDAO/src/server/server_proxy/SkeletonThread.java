@@ -27,32 +27,38 @@ public class SkeletonThread implements Runnable{
 	@Override
 	public void run() {
 		try {
+	
 			DataInputStream din= new DataInputStream(new BufferedInputStream(socket.getInputStream()));			
 			String comando= din.readUTF();
 			DataOutputStream dos= new DataOutputStream(new BufferedOutputStream(socket.getOutputStream() ));
 			if(comando.equalsIgnoreCase("adattaConfigurazione")){
 				System.out.println("Adatta conf");
+				//int autoScelta=(int) din.readInt();
 				ObjectInputStream ois= new ObjectInputStream(din);
-				Auto autoScelta= (Auto) ois.readObject();
-				Configurazione confScelta= (Configurazione) ois.readObject();
+				int autoScelta= (int) ois.readObject();
+				System.out.println("auto scelta: "+ autoScelta);
+				//int confScelta=(int) din.readInt();
+				int confScelta= (int) ois.readObject();
+				System.out.println("conf scelta: "+confScelta);
 			
-				this.ges_cps.associaConfigurazione(autoScelta,confScelta);
-				dos.writeBoolean(true);
-				dos.flush();
+				//this.ges_cps.associaConfigurazione(autoScelta,confScelta);
+				ObjectOutputStream oos= new ObjectOutputStream(dos);
+				oos.writeObject(1);
+				//dos.writeInt(1);
+				//dos.flush();
+				oos.flush();
 				System.out.println("Configurata");
 				
 			}else if(comando.equalsIgnoreCase("getAllConf")){
 				System.out.println("getAllConf");
 				ObjectInputStream ois= new ObjectInputStream(din);
-				Utente utente=(Utente)ois.readObject();
-				
+			
+				//int id_utente=(int)din.readInt();;
+				//Utente u=this.ges_cps.getUtente(id_utente);
 				//
-				//Utente u=this.ges_cps.checkUtente(utente);
-				
-				//
-				ArrayList<Configurazione> lista_conf=new ArrayList<Configurazione>();
+				Utente utente= new Utente(0,"Dario","123da","mail");
+				ArrayList<String> lista_conf=new ArrayList<String>();
 				lista_conf = this.ges_cps.getAllConf(utente);
-				
 				ObjectOutputStream oos= new ObjectOutputStream(dos);
 				oos.writeObject(lista_conf);
 				oos.flush();
@@ -62,7 +68,7 @@ public class SkeletonThread implements Runnable{
 				ObjectInputStream ois= new ObjectInputStream(din);
 				Utente utente=(Utente)ois.readObject();
 				//Utente u=this.ges_cps.checkUtente(utente);
-				ArrayList<Auto> lista_auto= new ArrayList<>();
+				ArrayList<String> lista_auto= new ArrayList<String>();
 				lista_auto = this.ges_cps.getAllAuto(utente) ;
 				
 				ObjectOutputStream oos= new ObjectOutputStream(dos);
