@@ -41,7 +41,7 @@ public class SkeletonThread implements Runnable{
 				int confScelta= (int) ois.readObject();
 				System.out.println("conf scelta: "+confScelta);
 			
-				//this.ges_cps.associaConfigurazione(autoScelta,confScelta);
+				this.ges_cps.associaConfigurazione(autoScelta,confScelta);
 				ObjectOutputStream oos= new ObjectOutputStream(dos);
 				oos.writeObject(1);
 				//dos.writeInt(1);
@@ -52,11 +52,12 @@ public class SkeletonThread implements Runnable{
 			}else if(comando.equalsIgnoreCase("getAllConf")){
 				System.out.println("getAllConf");
 				ObjectInputStream ois= new ObjectInputStream(din);
-			
+				int id_utente=(int)ois.readObject();
 				//int id_utente=(int)din.readInt();;
 				//Utente u=this.ges_cps.getUtente(id_utente);
 				//
-				Utente utente= new Utente(0,"Dario","123da","mail");
+				//Utente utente= new Utente(0,"Dario","123da","mail");
+				Utente utente= this.ges_cps.getUtente(id_utente);
 				ArrayList<String> lista_conf=new ArrayList<String>();
 				lista_conf = this.ges_cps.getAllConf(utente);
 				ObjectOutputStream oos= new ObjectOutputStream(dos);
@@ -66,8 +67,9 @@ public class SkeletonThread implements Runnable{
 				System.out.println("getAllAuto");
 				
 				ObjectInputStream ois= new ObjectInputStream(din);
-				Utente utente=(Utente)ois.readObject();
+				int id_utente=(int)ois.readObject();
 				//Utente u=this.ges_cps.checkUtente(utente);
+				Utente utente= this.ges_cps.getUtente(id_utente);
 				ArrayList<String> lista_auto= new ArrayList<String>();
 				lista_auto = this.ges_cps.getAllAuto(utente) ;
 				

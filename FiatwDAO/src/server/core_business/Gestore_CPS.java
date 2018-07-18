@@ -108,7 +108,7 @@ public class Gestore_CPS extends Gestore_CPS_Skeleton{
 
 
 	@Override
-	public void associaConfigurazione(int a_id, int c_id) {
+	public void associaConfigurazione(int   a_id, int c_id) {
 		
 		
 		TransactionManager tm = TransactionManagerFactory.createTransactionManager();
