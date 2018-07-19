@@ -57,7 +57,7 @@ public class BackgroundSocket extends AsyncTask<Utente, Void, ArrayList<String>>
         try {
             //usare 192.168.1.8 per testarlo in locale
            // socket = new Socket("5.88.218.119", 8585);
-           socket = new Socket("192.168.1.121", 8585);
+            socket = new Socket("192.168.1.126", 8585);
 
             DataOutputStream dos= new DataOutputStream(new BufferedOutputStream(socket.getOutputStream() ));
             if(command==1) {

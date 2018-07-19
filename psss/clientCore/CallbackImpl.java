@@ -13,6 +13,8 @@ public class CallbackImpl implements ICallback {
     //NB: le suddette classi sono estensioni delle rispettive UI
     @Override
     public void call(ArrayList<String> strings, Activity act) {
+        UtenteBusiness utenteBusiness= UtenteBusiness.getUtenteBusiness();
+        utenteBusiness.setListaAuto(strings);
         ub=new SelezionaAuto();
         ub.draw(strings,act);
 
@@ -20,6 +22,8 @@ public class CallbackImpl implements ICallback {
 
     @Override
     public void call2(ArrayList<String> strings, Activity ac) {
+        UtenteBusiness utenteBusiness= UtenteBusiness.getUtenteBusiness();
+        utenteBusiness.setListaConf(strings);
         SelezioneConfigurazione cb = new SelezioneConfigurazione();
         cb.draw(strings,ac);
 

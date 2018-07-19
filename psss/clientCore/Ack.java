@@ -1,10 +1,10 @@
 package com.example.zerin.psss.clientCore;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.widget.TextView;
 
 import com.example.zerin.psss.R;
+import com.example.zerin.psss.userInterfaces.UIAck;
 
 import java.util.ArrayList;
 

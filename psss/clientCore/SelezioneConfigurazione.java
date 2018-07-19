@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zerin.psss.R;
+import com.example.zerin.psss.userInterfaces.UIAck;
+import com.example.zerin.psss.userInterfaces.UISelezionaConfigurazione;
 
 import java.util.ArrayList;
 
@@ -47,7 +49,7 @@ public class SelezioneConfigurazione extends UISelezionaConfigurazione {
                 lparams.setMargins(650, 200 * (i + 1), 0, 0);
                 Button b= new Button(act);
                 b.setLayoutParams(lparams);
-                b.setText("RIEPILOGO CONFIGURAZIONE");
+                b.setText("RIEP CONF#"+i);
                 act.addContentView(b, lparams);}}
         //qui poi va il codice per passare all'activity di selezione configurazione
         final EditText tx = act.findViewById(R.id.editText2);
@@ -58,15 +60,15 @@ public class SelezioneConfigurazione extends UISelezionaConfigurazione {
             public void onClick(View v) { //alla pressione del bottone submit...
                 String stringa = tx.getText().toString();
                 int a = Integer.parseInt(stringa);
-                /*if (a > allConf.size()) {
+                if (a > allConf.size()) {
                     Toast errorToast = Toast.makeText(act, "Error, pls enter a valid id", Toast.LENGTH_SHORT);
                     errorToast.show();
-                } else {*/
+                } else {
                     String sceltaAuto= (String) act.getIntent().getSerializableExtra("Auto");
                     int idAuto = (int) act.getIntent().getSerializableExtra("idAuto");
                     String conf = allConf.get(a);
                     act.startActivity(new Intent(act, UIAck.class).putExtra("Conf",conf).putExtra("idConf",a).putExtra("idAuto",idAuto).putExtra("Auto",sceltaAuto));
-               // }
+                }
                 //CON PUTEXTRA PASSO ALLA SUCCESSIVA SCHERMATA DEI VALORI
             }
         });

@@ -11,9 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.zerin.psss.ClientEntity.Auto;
 import com.example.zerin.psss.ClientEntity.Utente;
 import com.example.zerin.psss.R;
+import com.example.zerin.psss.userInterfaces.UISelezionaAuto;
+import com.example.zerin.psss.userInterfaces.UISelezionaConfigurazione;
 
 import java.util.ArrayList;
 
@@ -52,13 +53,12 @@ public class SelezionaAuto extends UISelezionaAuto {
                      @Override
                      public void onClick(View v) {
                          String stringa = tx.getText().toString();
-                         int a = Integer.parseInt(stringa); //l'id parte da 1 mentre quello dell'array parte da 0 INDICE!
-
-                        /* if (a > allAuto.size()) {
+                         int a = Integer.parseInt(stringa); //l'id parte da 1 mentre quello dell'array parte da 0
+                         if (a > allAuto.size()) {
                              Toast errorToast = Toast.makeText(act, "Error, pls enter a valid id", Toast.LENGTH_SHORT);
                              errorToast.show();
-                         } else {*/
-                             String scelta=  allAuto.get(a);//ID SCELTO
+                         } else {
+                             String scelta=  allAuto.get(a);
                              Log.v("33","fin qui arriva");
                              Utente u=(Utente) act.getIntent().getSerializableExtra("Utente");
                              if(u==null){
@@ -66,7 +66,7 @@ public class SelezionaAuto extends UISelezionaAuto {
                              }
                              act.startActivity(new Intent(act, UISelezionaConfigurazione.class).putExtra("Auto", scelta).putExtra("idAuto",a).putExtra("Utente",u));
 
-                         //}
+                         }
              }
         });
     }
