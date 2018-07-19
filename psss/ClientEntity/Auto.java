@@ -2,31 +2,47 @@ package com.example.zerin.psss.ClientEntity;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Auto implements Serializable {
-        private static final long serialVersionUID = 1L;
-        private String targa;
-        private int id;
-        private String modello;
 
-        public Auto(int id,String targa,String modello) {
-            this.targa=targa;
-            this.id=id;
-            this.modello=modello;
-        }
-        public String getTarga() {
-            return  this.targa;
-        }
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    private String targa;
+    private int id;
+    private String modello;
+    private ArrayList<Configurabilita> lista_configurabilita = null;
 
-        public int getId() {
-            return this.id;
-        }
+    public Auto(int id, String targa, String modello) {
+        lista_configurabilita = new ArrayList<Configurabilita>();
+        this.targa = targa;
+        this.id = id;
+        this.modello = modello;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public String getTarga() {
+        return this.targa;
+    }
+
+    public String getModello() {
+        return this.modello;
+    }
+
+    public ArrayList<Configurabilita> getLista_configurabilita() {
+        return lista_configurabilita;
+    }
+
+    public ArrayList<Configurabilita> getListaConfigurabilita() {
+        return lista_configurabilita;
+    }
 
 
 
-        public String getModello(){
-            return this.modello;
-        }
-        }
-
+}
 

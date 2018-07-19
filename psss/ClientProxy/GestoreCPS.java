@@ -12,6 +12,19 @@ import java.util.ArrayList;
 public class GestoreCPS implements IGestoreCPS {
     ICallback callback;
 
+    private static GestoreCPS gestoreCPS_instance=null;
+
+    private GestoreCPS() {
+    }
+
+    public static synchronized GestoreCPS getGestoreCPS() {
+        if(gestoreCPS_instance==null) {
+            //	System.out.println("Inizializzo il gestoreCPS");
+            gestoreCPS_instance=new GestoreCPS();
+        }
+        //System.out.println("Ritorna il gestoreCPS");
+        return gestoreCPS_instance;
+    }
 
     @Override
     public ArrayList<String> getAllAuto(Utente u, Activity act) {

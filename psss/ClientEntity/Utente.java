@@ -1,33 +1,34 @@
 package com.example.zerin.psss.ClientEntity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+public class Utente implements Serializable{
 
-public class Utente implements Serializable {
     private String password;
     private String name;
     private String email;
     private int id;
 
     public Utente(int id,String n, String p, String email) {
-        this.id=id;
-        this.password=p;
-        this.name=n;
-        this.email=email;
+            this.id=id;
+            this.password=p;
+            this.name=n;
+            this.email=email;
     }
 
     public String getPassword() {
-        return password;
-    }
-
+            return password;
+            }
     public String getName() {
-        return name;
-    }
-
+            return name;
+            }
     public String getEmail() {
-        return email;
-    }
-
+            return email;
+            }
     public int getId() {
-        return this.id;
-    }
+            return id;
+            }
+
+
+
 }

@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.zerin.psss.ClientEntity.Auto;
 import com.example.zerin.psss.ClientEntity.Utente;
 import com.example.zerin.psss.R;
 import com.example.zerin.psss.userInterfaces.UISelezionaAuto;
@@ -20,11 +21,14 @@ import java.util.ArrayList;
 
 public class SelezionaAuto extends UISelezionaAuto {
     private Context cx;
-    private ArrayList<String> allAuto;
+    private ArrayList<Auto> allAuto;
     private Activity act;
 
+    public SelezionaAuto(){
+        allAuto= new ArrayList<Auto>();
+    }
 
-    public void draw(ArrayList<String> allAut, Activity a){
+    public void draw(ArrayList<Auto> allAut, Activity a){
         //setContentView(R.layout.activity_uiseleziona_auto);
         this.act=a;
         this.allAuto=allAut;
@@ -41,7 +45,7 @@ public class SelezionaAuto extends UISelezionaAuto {
                  lparams.setMargins(50, 40 * (i + 1), 0, 0);
                  TextView tv = new TextView(act);
                  tv.setLayoutParams(lparams);
-                 tv.setText(allAuto.get(i));
+                 tv.setText("#"+i+": Auto con targa:"+allAuto.get(i).getTarga()+" e modello:"+allAuto.get(i).getModello());
                  tv.setTextSize(1,16);
                  act.addContentView(tv, lparams);}}
 
@@ -53,18 +57,18 @@ public class SelezionaAuto extends UISelezionaAuto {
                      @Override
                      public void onClick(View v) {
                          String stringa = tx.getText().toString();
-                         int a = Integer.parseInt(stringa)-1; //l'id parte da 1 mentre quello dell'array parte da 0
-                         if (a > allAuto.size()+1) {
+                         int a = Integer.parseInt(stringa); //l'id parte da 1 mentre quello dell'array parte da 0
+                         if (a > allAuto.size()) {
                              Toast errorToast = Toast.makeText(act, "Error, pls enter a valid id", Toast.LENGTH_SHORT);
                              errorToast.show();
                          } else {
-                             String scelta=  allAuto.get(a);
+                             Auto scelta=  allAuto.get(a);
                              Log.v("33","fin qui arriva");
                              Utente u=(Utente) act.getIntent().getSerializableExtra("Utente");
                              if(u==null){
                                  Log.e("393939","utente nullo");
                              }
-                             act.startActivity(new Intent(act, UISelezionaConfigurazione.class).putExtra("Auto", scelta).putExtra("idAuto",a).putExtra("Utente",u));
+                             act.startActivity(new Intent(act, UISelezionaConfigurazione.class).putExtra("Auto", scelta).putExtra("idAuto",allAuto.get(a).getId()).putExtra("Utente",u));
 
                          }
              }
