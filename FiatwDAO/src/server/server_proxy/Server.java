@@ -1,5 +1,7 @@
 package server.server_proxy;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import server.core_business.Gestore_Auto;

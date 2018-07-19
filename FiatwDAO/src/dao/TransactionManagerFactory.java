@@ -6,9 +6,9 @@ package dao;
  */
 public class TransactionManagerFactory {
 
-	private static String databasePath = "jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7246756";
-    private static String databaseUsername = "sql7246756";
-    private static String databasePassword = "AfHWlUpq6e";
+	private static String databasePath = "jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7248166";
+    private static String databaseUsername = "sql7248166";
+    private static String databasePassword = "TXCPMAf2zy";
     private static boolean initialized = false;
     
     public static void initializeTransactionManager(String databasePath, String databaseUsername, String databasePassword) {

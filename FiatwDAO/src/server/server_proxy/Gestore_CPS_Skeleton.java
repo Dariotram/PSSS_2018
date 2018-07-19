@@ -1,6 +1,7 @@
 package server.server_proxy;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -12,6 +13,7 @@ public abstract class Gestore_CPS_Skeleton implements IGestoreCPS{
 	public void runSkeleton(){
 		try{
 			ServerSocket server= new ServerSocket(8585);
+			System.out.println(InetAddress.getLocalHost().getHostAddress());
 			System.out.println("Server avviato e in attesa");
 			while(true){
 				Socket socket=server.accept();

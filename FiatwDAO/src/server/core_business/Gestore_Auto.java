@@ -3,7 +3,6 @@ package server.core_business;
 import java.util.ArrayList;
 
 import dao.DAOAuto;
-import dao.DAOConfigurazione;
 import dao.DAOException;
 import dao.TransactionManager;
 import dao.TransactionManagerFactory;
@@ -11,6 +10,7 @@ import server.entity.Auto;
 import server.entity.Componente;
 import server.entity.Configurabilita;
 import server.entity.Configurazione;
+
 
 public class Gestore_Auto {
 	private static Gestore_Auto gestoreAuto_instance=null;
@@ -49,7 +49,7 @@ public class Gestore_Auto {
 	
 	//***metodi che chiamano metodi DAO***
 	public ArrayList<Componente> getListaComp(Auto a) throws PersistenceException{
-		
+
 		ArrayList<Componente> listaComponenti = null;
 		
 		TransactionManager tm = TransactionManagerFactory.createTransactionManager();
@@ -72,7 +72,6 @@ public class Gestore_Auto {
 	
 	public void setValoreComponenteAuto(Auto a,Componente c,int val) throws PersistenceException{
 		
-		
 		//Configurabilita configurabilita=null;
 		TransactionManager tm = TransactionManagerFactory.createTransactionManager();
 		
@@ -93,7 +92,6 @@ public class Gestore_Auto {
 	
 
 	public void setConfigurazioneAuto(Auto a, Configurazione c) throws PersistenceException{
-	
 	TransactionManager tm = TransactionManagerFactory.createTransactionManager();
 	
 	tm.beginTransaction();
@@ -109,5 +107,18 @@ public class Gestore_Auto {
 		
 	}
 	
-
+	public Auto getAuto( int id_auto) throws PersistenceException {
+		TransactionManager tm = TransactionManagerFactory.createTransactionManager();
+		
+		tm.beginTransaction();
+		
+			try {
+				Auto a= DAOAuto.readAuto(tm, id_auto);
+				tm.commitTransaction();
+				return a;
+			} catch (DAOException e) {
+				tm.rollbackTransaction();
+	            throw new PersistenceException("Impossibile trovare l'auto con questo id"+id_auto, e);
+			}
+	}
 }
