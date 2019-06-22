@@ -8,8 +8,9 @@ import server.entity.Utente;
 
 public interface IGestoreCPS {
 	
-	public ArrayList<Auto> getAllAuto(Utente u);
-	public ArrayList<Configurazione> getAllConf(Utente u);
-	public void associaConfigurazione(Auto a,Configurazione c);
-	public Utente checkUtente(Utente u);
+	public Utente getUtente(int id_u);
+	public ArrayList<String> getAllAuto(Utente u);
+	public ArrayList<String> getAllConf(Utente u);
+	public void associaConfigurazione(int id_a,int id_c);
+	//public Utente checkUtente(int u);
 }
