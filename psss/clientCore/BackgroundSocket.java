@@ -4,7 +4,8 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 
-
+import com.example.zerin.psss.ClientEntity.Auto;
+import com.example.zerin.psss.ClientEntity.Configurazione;
 import com.example.zerin.psss.ClientEntity.Utente;
 import com.example.zerin.psss.interfaces.ICallback;
 
@@ -34,8 +35,10 @@ public class BackgroundSocket extends AsyncTask<Utente, Void, ArrayList<String>>
     private int autoScelta;
     private int confScelta;
     private int ack;
+    private  UtenteBusiness ub;
 
     public BackgroundSocket(Utente ut,ICallback cal,Activity acti,int c){
+        ub=UtenteBusiness.getUtenteBusiness();
         this.u=ut;
         this.callback=cal;
         this.ac=acti;
@@ -43,6 +46,7 @@ public class BackgroundSocket extends AsyncTask<Utente, Void, ArrayList<String>>
     }
 
     public BackgroundSocket(int autoScelta,int confScelta,int command,ICallback call,Activity a){
+        ub=UtenteBusiness.getUtenteBusiness();
         this.autoScelta=autoScelta;
         this.confScelta=confScelta;
         this.command=command;
@@ -56,8 +60,8 @@ public class BackgroundSocket extends AsyncTask<Utente, Void, ArrayList<String>>
     protected ArrayList<String> doInBackground(Utente... utentes) {
         try {
             //usare 192.168.1.8 per testarlo in locale
-            //socket = new Socket("5.88.218.119", 8585);
-            socket = new Socket("192.168.1.2", 8585);
+           // socket = new Socket("5.88.218.119", 8585);
+            socket = new Socket("192.168.1.126", 8585);
 
             DataOutputStream dos= new DataOutputStream(new BufferedOutputStream(socket.getOutputStream() ));
             if(command==1) {
@@ -69,6 +73,7 @@ public class BackgroundSocket extends AsyncTask<Utente, Void, ArrayList<String>>
             else{
                 dos.writeUTF("adattaConfigurazione");
             }
+
             if (command==3){
                 ObjectOutputStream oos = new ObjectOutputStream(dos);
                 oos.writeObject(autoScelta);
@@ -84,8 +89,8 @@ public class BackgroundSocket extends AsyncTask<Utente, Void, ArrayList<String>>
                 lista=new ArrayList<String>();
                 return lista;
             }
-            else {
-                //se il comando è getAuto oppure getConf
+            else if(command==2) {
+                //se il comando è getConf
                 int a = u.getId();
                 ObjectOutputStream oos = new ObjectOutputStream(dos);
                 oos.writeObject(u.getId());
@@ -93,7 +98,33 @@ public class BackgroundSocket extends AsyncTask<Utente, Void, ArrayList<String>>
 
                 DataInputStream dis = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
                 ObjectInputStream ois = new ObjectInputStream(dis);
-                lista = (ArrayList<String>) ois.readObject(); //ricevo lista
+                ArrayList<Integer> listaId= new ArrayList<Integer>();
+                ArrayList<String> listaNome= new ArrayList<String>();
+
+                listaId = (ArrayList<Integer>) ois.readObject(); //ricevo listaId
+                listaNome= (ArrayList<String>) ois.readObject();//listaNome
+
+                ub.setAllConfig(listaId,listaNome);// salvo queste configurazioni
+                return listaNome;
+            }else if(command==1){
+                int a = u.getId();
+                ObjectOutputStream oos = new ObjectOutputStream(dos);
+                oos.writeObject(u.getId());
+                dos.flush(); //invio id utente
+
+                DataInputStream dis = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+                ObjectInputStream ois = new ObjectInputStream(dis);
+                ArrayList<Integer> listaId= new ArrayList<Integer>();
+                ArrayList<String> listaTarga= new ArrayList<String>();
+                ArrayList<String> listaModello= new ArrayList<String>();
+
+                listaId = (ArrayList<Integer>) ois.readObject(); //ricevo listaId
+                listaTarga= (ArrayList<String>) ois.readObject();//ricevo listatarga
+                listaModello= (ArrayList<String>) ois.readObject();//ricevo listaModello
+
+                ub.setAllAuto(listaId,listaTarga,listaModello);//salvo queste auto
+
+                return listaTarga;
             }
         } catch (UnknownHostException ex) {
             ex.printStackTrace();
@@ -114,10 +145,14 @@ public class BackgroundSocket extends AsyncTask<Utente, Void, ArrayList<String>>
         //il risultato del doItInBackground va usato qui e passato alla callback insieme al riferimento all'activity
         //vedere callBack impl
         if(this.command==1) {
-            callback.call(strings, ac);
+            ArrayList<Auto> listaAuto= new ArrayList<Auto>();
+            listaAuto=ub.getAllAutobyTarga(strings);//ottengo le auto  a partire delle targhe
+            callback.call(listaAuto, ac);
         }
         else if (this.command==2){
-            callback.call2(strings,ac);
+            ArrayList<Configurazione> listaConf= new ArrayList<Configurazione>();
+            listaConf=ub.getAllConfbyName(strings);//ottengo le configurazioni a partire dai nomi
+            callback.call2(listaConf,ac);
         }
         else {
             if(this.ack==1){

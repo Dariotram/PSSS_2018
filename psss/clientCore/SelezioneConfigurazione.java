@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.zerin.psss.ClientEntity.Auto;
+import com.example.zerin.psss.ClientEntity.Configurazione;
 import com.example.zerin.psss.R;
 import com.example.zerin.psss.userInterfaces.UIAck;
 import com.example.zerin.psss.userInterfaces.UISelezionaConfigurazione;
@@ -19,11 +21,14 @@ import java.util.ArrayList;
 
 public class SelezioneConfigurazione extends UISelezionaConfigurazione {
     private Context cx;
-    private ArrayList<String> allConf;
+    private ArrayList<Configurazione> allConf;
     private Activity act;
 
+    public SelezioneConfigurazione(){
+        allConf= new ArrayList<Configurazione>();
+    }
 
-    public void draw(ArrayList<String> allC, Activity a){
+    public void draw(ArrayList<Configurazione> allC, Activity a){
         //setContentView(R.layout.activity_uiseleziona_auto);
         this.act=a;
         this.allConf=allC;
@@ -39,17 +44,17 @@ public class SelezioneConfigurazione extends UISelezionaConfigurazione {
                 lparams.setMargins(50, 200 * (i + 1), 0, 50);
                 TextView tv = new TextView(act);
                 tv.setLayoutParams(lparams);
-                tv.setText(allConf.get(i));
+                tv.setText("#"+i+": Configurazione con nome:"+allConf.get(i).getName());
                 tv.setTextSize(1,16);
                 act.addContentView(tv, lparams);}
             for (int i = 0; i < allConf.size(); i++) { //creo a schermo i bottoni per il riepilogo
                 //NB i bottoni non sono implementati
                 Log.v("2", " ci siamo");
                 LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                lparams.setMargins(650, 200 * (i + 1), 0, 0);
+                lparams.setMargins(500, 30+200 * (i+1), 0, 50);
                 Button b= new Button(act);
                 b.setLayoutParams(lparams);
-                b.setText("RIEPILOGO CONFIGURAZIONE");
+                b.setText("Riep Conf#"+i);
                 act.addContentView(b, lparams);}}
         //qui poi va il codice per passare all'activity di selezione configurazione
         final EditText tx = act.findViewById(R.id.editText2);
@@ -59,15 +64,17 @@ public class SelezioneConfigurazione extends UISelezionaConfigurazione {
             @Override
             public void onClick(View v) { //alla pressione del bottone submit...
                 String stringa = tx.getText().toString();
-                int a = Integer.parseInt(stringa)-1;
-                if (a > allConf.size()+1) {
+                int a = Integer.parseInt(stringa);
+                if (a > allConf.size()) {
                     Toast errorToast = Toast.makeText(act, "Error, pls enter a valid id", Toast.LENGTH_SHORT);
                     errorToast.show();
                 } else {
-                    String sceltaAuto= (String) act.getIntent().getSerializableExtra("Auto");
+                    Auto sceltaAuto= (Auto) act.getIntent().getSerializableExtra("Auto");
+                    Configurazione sceltaConf= allConf.get(a);
                     int idAuto = (int) act.getIntent().getSerializableExtra("idAuto");
-                    String conf = allConf.get(a);
-                    act.startActivity(new Intent(act, UIAck.class).putExtra("Conf",conf).putExtra("idConf",a).putExtra("idAuto",idAuto).putExtra("Auto",sceltaAuto));
+                    int id_conf = allConf.get(a).getId();
+
+                    act.startActivity(new Intent(act, UIAck.class).putExtra("idConf",id_conf).putExtra("Conf",sceltaConf).putExtra("idAuto",idAuto).putExtra("Auto",sceltaAuto));
                 }
                 //CON PUTEXTRA PASSO ALLA SUCCESSIVA SCHERMATA DEI VALORI
             }

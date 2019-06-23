@@ -1,6 +1,7 @@
 package server.core_business;
 import java.util.ArrayList;
 
+
 import dao.DAOException;
 import dao.DAOUtente;
 import dao.TransactionManager;
@@ -44,12 +45,20 @@ public class Gestore_Utente {
 		return info_utente.registraUtente(id,s,p,email);
 	}
 	
-	public Utente getUtente(int id) {
-		return info_utente.getUtente(id);
-	}
-	
-	public Utente checkUtente(Utente u) {
-		return info_utente.checkUtente(u);
+	public Utente getUtente(int id_u) throws PersistenceException {
+		Utente u=null;
+		TransactionManager tm = TransactionManagerFactory.createTransactionManager();
+		
+		tm.beginTransaction();
+		
+			try {
+				u= DAOUtente.readUtente(tm, id_u);
+				tm.commitTransaction();
+			} catch (DAOException e) {
+				tm.rollbackTransaction();
+	            throw new PersistenceException("Impossibile trovare l'utente con questo id"+id_u, e);
+			}
+			return u;
 	}
 	
 	public int getPassword(Utente u) {
@@ -121,11 +130,7 @@ public ArrayList<Auto> getListaAuto(Utente u) throws IllegalArgumentException, P
 	public ArrayList<Proprieta> getListaProprieta(Utente u){
 		return info_utente.getListaProprieta(u);
 	}
-	
-	public void associaConfigurazione(Utente u){
-		ArrayList<Auto> listaAuto = getAllAuto(u);
-		
-	}
+
 	
 }
 
